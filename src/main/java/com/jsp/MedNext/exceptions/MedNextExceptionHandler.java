@@ -21,12 +21,12 @@ public class MedNextExceptionHandler {
 				"You Cannot Perform this operation", e.getMessage());
 	}
 	
-	@ExceptionHandler(TransientPropertyValueException.class)
-	public ResponseEntity<SuccessResponse> transientPVE(TransientPropertyValueException e)
-	{
-		return BuilderClass.builderHelp(HttpStatus.BAD_REQUEST, 
-				"Please follow the principles of data Insertion", e.getMessage());
-	}
+//	@ExceptionHandler(TransientPropertyValueException.class)
+//	public ResponseEntity<SuccessResponse> transientPVE(TransientPropertyValueException e)
+//	{
+//		return BuilderClass.builderHelp(HttpStatus.BAD_REQUEST, 
+//				"Please follow the principles of data Insertion", e.getMessage());
+//	}
 	
 	@ExceptionHandler(NotFoundException.class)
 	public ResponseEntity<SuccessResponse> notFoundException(NotFoundException e)

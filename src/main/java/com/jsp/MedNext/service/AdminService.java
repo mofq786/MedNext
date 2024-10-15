@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.jsp.MedNext.dao.AdminDao;
+import com.jsp.MedNext.dao.MemberDao;
 import com.jsp.MedNext.entity.Admin;
+import com.jsp.MedNext.entity.Member;
 import com.jsp.MedNext.exceptions.NotFoundException;
 import com.jsp.MedNext.utils.BuilderClass;
 import com.jsp.MedNext.utils.SuccessResponse;
@@ -17,6 +19,9 @@ public class AdminService {
 	
 	@Autowired
 	private AdminDao adminDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 	
 	public ResponseEntity<SuccessResponse> saveAdmin(Admin admin)
 	{
@@ -72,5 +77,25 @@ public class AdminService {
 				"Admin Details Updated Successfully", adm);
 		
 		throw new NotFoundException("Admin with "+admin.getId()+" does not exist");
+	}
+	
+	public ResponseEntity<SuccessResponse> enableMember(int adminId, int memId)
+	{
+		Admin admin = adminDao.getAdmin(adminId);
+		if(admin != null)
+		{
+			Member member = memberDao.getMemberById(memId);
+			if(member != null)
+			{
+				member.setDisabled(true);
+				member = memberDao.updateMember(member);
+				return BuilderClass.builderHelp(HttpStatus.ACCEPTED, 
+						"Member Enabled Successfully", member);
+			}
+			
+			throw new NotFoundException("Member with Id:"+memId+" not found");
+		}
+		
+		throw new NotFoundException("Admin with Id:"+adminId+" not found");
 	}
 }

@@ -2,6 +2,7 @@ package com.jsp.MedNext.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,7 +26,7 @@ public class Member {
 	private LocalDate dob;
 	private String email;
 	private long mobile;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	private boolean disabled;
 	

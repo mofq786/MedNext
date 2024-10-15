@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jsp.MedNext.entity.Admin;
 import com.jsp.MedNext.service.AdminService;
+import com.jsp.MedNext.utils.MedNextMailSender;
 import com.jsp.MedNext.utils.SuccessResponse;
 
 @RestController
@@ -40,9 +41,16 @@ public class AdminController {
 		return adminServ.updateAdminDetails(admin);
 	}
 	
-	@DeleteMapping("/delete")
+	@DeleteMapping("/delete") 
 	public ResponseEntity<SuccessResponse> delete(@RequestParam int id)
 	{
 		return adminServ.deleteAdminByUsingId(id);
 	}
+	
+	@PutMapping("/enable-member")
+	public ResponseEntity<SuccessResponse> enableMember(@RequestParam int adminId, @RequestParam int memId)
+	{
+		return adminServ.enableMember(adminId, memId);
+	}
+	
 }
