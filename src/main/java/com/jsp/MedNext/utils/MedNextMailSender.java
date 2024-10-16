@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import com.jsp.MedNext.entity.Member;
+import com.jsp.MedNext.entity.Orders;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -50,6 +51,33 @@ public class MedNextMailSender {
 		javaMailSender.send(message);
 	
 		
+	}
+	
+	public void sendOrderEmail(String memberEmail,Orders order) throws MessagingException
+	{
+//		MimeMessage message = javaMailSender.createMimeMessage();
+//		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+//		helper.setFrom("mofq9786@gmail.com");
+//		helper.setTo(memberEmail);
+//		helper.setSubject("MedNext Order Placed Successfully");
+//		helper.setText("<h4>Dear, Radha</h4>"
+//				+ "<p>Your Placed Successfully. Here are your order details</p>"
+//				+ "<center>"
+//				+ "<h2 style='color:red;'>Order Summary</h2>"
+//				+ "<table border='1' style='border-collapse: collapse;'>"
+//				+ "<tr><td>"++"</td><td>"+member.getId()+"</td></tr>"
+//				+ "<tr><td>"++"</td><td>"+member.getName()+"</td></tr>"
+//				+ "<tr><td>"++"</td><td>"+member.getEmail()+"</td></tr>"
+//				+ "<tr><td>\"++\"</td><td>"+member.getMobile()+"</td></tr>"
+//				+ "<tr><td>\"++\"</td><td>"+member.getGender()+"</td></tr>"
+//				+ "<tr><td>\"++\"</td><td>"+member.getDob()+"</td></tr>"
+//				+ "<tr><td>\"++\"</td><td>"+member.getAddress().getStreet()+", "
+//											+member.getAddress().getCity()+", "
+//											+member.getAddress().getState()+", "
+//											+member.getAddress().getCountry()+" - "
+//											+member.getAddress().getPincode()+". "
+//				+"</td></tr>"
+//				+ "</table></center>", true);
 	}
 
 }

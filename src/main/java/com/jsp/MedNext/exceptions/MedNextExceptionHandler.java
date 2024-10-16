@@ -34,4 +34,11 @@ public class MedNextExceptionHandler {
 		return BuilderClass.builderHelp(HttpStatus.NOT_FOUND, 
 				"Operation is Unsuccessful", e.getMsg());
 	}
+	
+	@ExceptionHandler(OutOfStock.class)
+	public ResponseEntity<SuccessResponse> outOfStockException(OutOfStock e)
+	{
+		return BuilderClass.builderHelp(HttpStatus.NOT_ACCEPTABLE, 
+				"Operation is Unsuccessful", e.getMsg());
+	}
 }
