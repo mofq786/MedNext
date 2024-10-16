@@ -6,4 +6,6 @@ import com.jsp.MedNext.entity.Drug;
 
 public interface DrugRepo extends JpaRepository<Drug, Integer> {
 
+	Drug findByName(String drugName);
+
 }

@@ -26,8 +26,8 @@ public class MedNextMailSender {
 		helper.setTo("mailmeasradha@gmail.com");
 		helper.setFrom("mofq9786@gmail.com");
 		helper.setSubject("Testing the mail");
-//		FileSystemResource file = new FileSystemResource(new File("/MedNext/src/main/resources/templates/Medicine.jpg"));
-//		helper.addAttachment("Medicine.jpg", file);
+		FileSystemResource file = new FileSystemResource(new File("/MedNext/src/main/resources/templates/Medicine.jpg"));
+		helper.addAttachment("Medicine.jpg", file);
 		helper.setText("<h4>Hi, Radha</h4>"
 				+ "<p>Just Now a new member registered on the platform. Here below, are the Member Details</p>"
 				+ "<center>"

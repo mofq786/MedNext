@@ -47,8 +47,12 @@ public class MemberService {
 		{
 			if(member.getPassword().equals(password))
 			{
-				return BuilderClass.builderHelp(HttpStatus.FOUND, 
+				if(member.isDisabled() == true)
+					return BuilderClass.builderHelp(HttpStatus.FOUND, 
 						"Member Login Succesful", member);
+				
+				return BuilderClass.builderHelp(HttpStatus.FOUND, 
+						"Member Not Approved yet by the admin", member);
 			}
 			
 			throw new NotFoundException("The Given Password:"+password+" is invalid");

@@ -28,11 +28,6 @@ public class Member {
 	private long mobile;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
-	private boolean disabled;
-	
-//	public void setDob(String dateOfBirth)
-//	{
-//		
-//	}
+	private boolean disabled = true;
 	
 }
