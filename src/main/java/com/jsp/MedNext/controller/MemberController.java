@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jsp.MedNext.entity.Member;
 import com.jsp.MedNext.service.MemberService;
@@ -72,6 +73,18 @@ public class MemberController {
 	{
 //		model.addAttribute("memberName", "farooq");
 		sender.sendOrderEmail(mail, null);
+	}
+	
+	@PutMapping("/upload")
+	public ResponseEntity<SuccessResponse> uploadProfile(@RequestParam int memberId, @RequestParam MultipartFile file) throws IOException
+	{
+		return memberServ.updateProfileInDb(memberId,file);
+	}
+	
+	@GetMapping("/fetch-image")
+	public ResponseEntity<byte[]> fetchProfile(@RequestParam int memberId) throws IOException
+	{
+		return memberServ.fetchProfileFromDb(memberId);
 	}
 	
 }

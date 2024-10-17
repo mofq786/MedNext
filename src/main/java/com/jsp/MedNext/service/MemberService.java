@@ -1,11 +1,15 @@
 package com.jsp.MedNext.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jsp.MedNext.dao.AddressDao;
 import com.jsp.MedNext.dao.MemberDao;
@@ -47,7 +51,7 @@ public class MemberService {
 		{
 			if(member.getPassword().equals(password))
 			{
-				if(member.isDisabled() == true)
+				if(member.isEnabled() == true)
 					return BuilderClass.builderHelp(HttpStatus.FOUND, 
 						"Member Login Succesful", member);
 				
@@ -94,6 +98,39 @@ public class MemberService {
 			return BuilderClass.builderHelp(HttpStatus.FOUND, 
 				"Member Details Found", membersList);
 		throw new NotFoundException("No Members Found");
+	}
+
+	public ResponseEntity<SuccessResponse> updateProfileInDb(int memberId, MultipartFile file) throws IOException {
+		
+		Member member = memberDao.getMemberById(memberId);
+		
+		if(member == null)
+		{
+			throw new NotFoundException("Member with Id:"+memberId+" Not Found");
+		}
+		
+		member.setImage(file.getBytes());
+		
+		Member updatedMember = memberDao.updateMember(member);
+		
+		return BuilderClass.builderHelp(HttpStatus.ACCEPTED, "Image Uploaded Successfully", updatedMember);
+		
+	}
+
+	public ResponseEntity<byte[]> fetchProfileFromDb(int memberId) {
+
+		Member member = memberDao.getMemberById(memberId);
+		
+		if(member == null)
+		{
+			throw new NotFoundException("Member with Id:"+memberId+" Not Found");
+		}
+		
+		byte[] data = member.getImage();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_PNG);
+		
+		return new ResponseEntity<byte[]>(data,headers,HttpStatus.FOUND);
 	}
 	
 }

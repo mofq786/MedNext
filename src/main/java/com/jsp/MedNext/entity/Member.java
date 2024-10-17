@@ -2,11 +2,15 @@ package com.jsp.MedNext.entity;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.Collate;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +32,9 @@ public class Member {
 	private long mobile;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
-	private boolean disabled = true;
+	@Lob
+	@Column(columnDefinition = "LONGBLOB", length = Integer.MAX_VALUE)
+	private byte[] image;
+	private boolean enabled;
 	
 }

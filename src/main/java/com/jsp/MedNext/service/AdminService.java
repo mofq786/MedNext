@@ -87,7 +87,7 @@ public class AdminService {
 			Member member = memberDao.getMemberById(memId);
 			if(member != null)
 			{
-				member.setDisabled(true);
+				member.setEnabled(true);
 				member = memberDao.updateMember(member);
 				return BuilderClass.builderHelp(HttpStatus.ACCEPTED, 
 						"Member Enabled Successfully", member);
