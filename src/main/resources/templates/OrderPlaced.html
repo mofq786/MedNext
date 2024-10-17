@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Order Placed Successfully</title>
+<style>
+body{
+	width: 100%;
+}
+
+table{
+	border: 2px solid red;
+	border-collapse: collapse;
+}
+td{
+	padding: 5px;
+}
+th,td{
+	border: 2px solid red;
+	width: 25%;
+}
+.bill{
+	font-size: 12px;
+}
+
+</style>
+</head>
+<body>
+
+<h3>Hi! <span th:text="${memberName}"></span></h3>
+<p><br>Your Order Placed Successfully and Here are the Order Details</p>
+<center>
+<h1>Order Summary</h1>
+<table>
+<tr>
+	<th>Drug Name</th>
+	<th>Quantity</th>
+	<th>Price</th>
+	
+</tr>
+<tr th:each="drug:${order.getDrugs}">
+	<td th:text="${drug.getName}"></td>
+	<td th:text="${drug.getQuantity}"></td>
+	<th th:text="${drug.getPrice}"></th>
+</tr>
+<tr>
+	<th class="bill" colspan='2'>Total Bill</th>
+	<th class="bill" th:text="${order.getOrderamount}"></th>
+</tr>
+</table>
+<h2>Thankyou for Using and Placing the Order on MedNext Platform.</h2>
+</center>
+
+</body>
+</html>
