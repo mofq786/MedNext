@@ -27,7 +27,7 @@ public class MedNextMailSender {
 	private TemplateEngine templateEngine;
 	
 	public void enableRequest(Member member) throws MessagingException
-	{
+	{ 
 		MimeMessage message = javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 		helper.setTo("mailmeasradha@gmail.com");

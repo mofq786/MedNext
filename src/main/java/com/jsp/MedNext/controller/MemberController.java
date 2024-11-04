@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,9 +29,6 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberServ;
-	
-	@Autowired
-	private MedNextMailSender sender;
 	
 	@PostMapping("/register")
 	public ResponseEntity<SuccessResponse> saveMember(@RequestBody Member member) throws MessagingException
@@ -66,13 +64,6 @@ public class MemberController {
 	public ResponseEntity<SuccessResponse> fetchAllMembers()
 	{
 		return memberServ.fetchAll();
-	}
-	
-	@PostMapping("/send-email")
-	public void sendMail(@RequestParam String mail) throws MessagingException, IOException
-	{
-//		model.addAttribute("memberName", "farooq");
-		sender.sendOrderEmail(mail, null);
 	}
 	
 	@PutMapping("/upload")
